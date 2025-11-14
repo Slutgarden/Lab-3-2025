@@ -1,10 +1,12 @@
 package functions;
 
 public class LinkedListTabulatedFunction implements TabulatedFunction {
+    private static final double EPS = 1e-9;
     public static class FunctionNode{
         private FunctionPoint point;
         private FunctionNode prev;
         private FunctionNode next;
+
 
         public FunctionNode(FunctionPoint point){
             this.point = point;
@@ -200,7 +202,7 @@ public class LinkedListTabulatedFunction implements TabulatedFunction {
     public void addPoint(FunctionPoint point) throws InappropriateFunctionPointException {
         FunctionNode current = head.next;
         while (current != head) {
-            if (point.getX() == current.point.getX()) {
+            if (Math.abs(point.getX() - current.point.getX()) < EPS)  {
                 throw new InappropriateFunctionPointException("Точка с таким X уже существует");
             }
             current = current.next;

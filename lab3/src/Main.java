@@ -9,7 +9,7 @@ public class Main {
         try {
             double[] values = {0, 1, 128, 2187, 16384};
 
-            TabulatedFunction f = new LinkedListTabulatedFunction(0, 4, values);
+            TabulatedFunction f = new ArrayTabulatedFunction(0, 4, values);
 
             System.out.println("Исходная функция:");
             printFunction(f);

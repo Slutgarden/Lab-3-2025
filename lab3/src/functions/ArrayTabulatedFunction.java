@@ -3,6 +3,7 @@ package functions;
 public class ArrayTabulatedFunction implements TabulatedFunction{
     private FunctionPoint[] points;
     private int pointsCount;
+    private static final double EPS = 1e-9;
 
     public ArrayTabulatedFunction(double leftX, double rightX, int pointsCount) {
 
@@ -59,7 +60,7 @@ public class ArrayTabulatedFunction implements TabulatedFunction{
         if (x < left || x > right) return Double.NaN;
 
         if (pointsCount == 1) {
-            if (x == left) {
+            if (Math.abs(x - left) <EPS) {
                 return points[0].getY();
             } else {
                 return Double.NaN;
@@ -69,8 +70,8 @@ public class ArrayTabulatedFunction implements TabulatedFunction{
         for (int i = 0; i < pointsCount - 1; i++) {
             double x0 = points[i].getX();
             double x1 = points[i + 1].getX();
-            if (x == x0) return points[i].getY();
-            if (x == x1) return points[i + 1].getY();
+            if (Math.abs(x - x0) <EPS) return points[i].getY();
+            if (Math.abs(x - x1) <EPS) return points[i + 1].getY();
             if (x > x0 && x < x1) {
                 double y0 = points[i].getY();
                 double y1 = points[i + 1].getY();
